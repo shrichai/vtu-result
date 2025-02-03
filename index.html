@@ -1,0 +1,371 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+        .form-group input:focus {
+            border-color: #007bff;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Login</h2>
+    <form id="loginForm">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required placeholder="Enter username">
+        </div>
+        <div class="form-group">
+            <label for="contactNumber">Contact Number</label>
+            <input type="text" id="contactNumber" name="contactNumber" required placeholder="Enter contact number">
+        </div>
+        <button type="submit" class="btn">Login</button>
+        <p id="errorMessage" class="error"></p>
+    </form>
+</div>
+
+<script>
+    const validCredentials = [
+        { username: "user1", contactNumber: "1234567890" },
+        { username: "ShriChai", contactNumber: "VIP" },
+{ username: "ChaithraShridhar", contactNumber: "VIP" },
+{ username: "Devendu P", contactNumber: "9447406158" },
+{ username: "Shrushti", contactNumber: "9482863035" },
+{ username: "Karishma K", contactNumber: "9538037499" },
+{ username: "Chethan K N", contactNumber: "7760701280" },
+{ username: "Srusthi Patil", contactNumber: "6362571919" },
+{ username: "Gagan N P", contactNumber: "9606329069" },
+{ username: "Sarika N", contactNumber: "9742016318" },
+{ username: "Lavanya V", contactNumber: "9743963236" },
+{ username: "Aparna G V", contactNumber: "9035389734" },
+{ username: "Pradeep kumara V H", contactNumber: "8217764877" },
+{ username: "MANISH.L", contactNumber: "8123097577" },
+{ username: "Swaroop", contactNumber: "7411396017" },
+{ username: "SRINIDHI BS", contactNumber: "8310184496" },
+{ username: "L Pragna Varshitha", contactNumber: "9742263822" },
+{ username: "Pallavi", contactNumber: "7483322010" },
+{ username: "Sumit Manjunath Raikar", contactNumber: "6364210739" },
+{ username: "Anagha PK", contactNumber: "9901341284" },
+{ username: "Malatesh T A", contactNumber: "8050044527" },
+{ username: "Aliya Mujahid", contactNumber: "6361386906" },
+{ username: "Gowtham N M", contactNumber: "9353977914" },
+{ username: "Ammineni kavya sree sai", contactNumber: "9390335278" },
+{ username: "Pavan A", contactNumber: "7483890104" },
+{ username: "Sunanda c pujari", contactNumber: "8951235314" },
+{ username: "Sandhya Halasagi", contactNumber: "7349613060" },
+{ username: "Akash K Mareguddi", contactNumber: "9380806567" },
+{ username: "Pruthvi K N", contactNumber: "7019463192" },
+{ username: "Harsha P", contactNumber: "9606040340" },
+{ username: "Jain pradnya Vardhaman", contactNumber: "9324608225" },
+{ username: "Shreya kulkarni", contactNumber: "9845490998" },
+{ username: "GUDADESHWAR MANJUNATH AMBIGER", contactNumber: "9113086877" },
+{ username: "Pooja arenad", contactNumber: "6361161491" },
+{ username: "Shridhar Murthy kk", contactNumber: "6366670292" },
+{ username: "Laxmi Ashok Bilur", contactNumber: "8310848293" },
+{ username: "Sinchana S", contactNumber: "9353343487" },
+{ username: "Manish M", contactNumber: "6380149600" },
+{ username: "Shree Lakshmi V C", contactNumber: "9353371272" },
+{ username: "Mohan prakash mali", contactNumber: "9611014020" },
+{ username: "KeerthiShree BM", contactNumber: "9113658274" },
+{ username: "Keerthana B", contactNumber: "9945121878" },
+{ username: "Harshitha", contactNumber: "8748069584" },
+{ username: "Aniruddh ummarji", contactNumber: "6361837984" },
+{ username: "Abhishek m u", contactNumber: "9110237109" },
+{ username: "Sudhanva Kulkarni", contactNumber: "9606385072" },
+{ username: "Vishnu Vardhan Reddy.B", contactNumber: "8296186347" },
+{ username: "Sumanth kumar", contactNumber: "8147228073" },
+{ username: "DHRUVA S KADAL", contactNumber: "9113038149" },
+{ username: "Yashas S H", contactNumber: "7619290168" },
+{ username: "Chetan Amaravati", contactNumber: "7760099141" },
+{ username: "Hithesh kumar", contactNumber: "9731602976" },
+{ username: "Sakshi.S.Kotturshettat", contactNumber: "8618308987" },
+{ username: "Mehak Lahoti", contactNumber: "9108920886" },
+{ username: "Chris Alexander", contactNumber: "9110669376" },
+{ username: "Devika.M.N", contactNumber: "9902658622" },
+{ username: "Chandana V", contactNumber: "8618530455" },
+{ username: "Krishna Kumar Thakur", contactNumber: "7367939929" },
+{ username: "Usha H G", contactNumber: "9632959539" },
+{ username: "Suraj Kumar Rawal D", contactNumber: "9008424023" },
+{ username: "Firdosh", contactNumber: "8088540889" },
+{ username: "B Akshita chowdary", contactNumber: "9036898389" },
+{ username: "B TARAK CHOWDARY", contactNumber: "9448082242" },
+{ username: "Mohammed Sameer hussain", contactNumber: "7760432169" },
+{ username: "Kushmitha V", contactNumber: "9632654251" },
+{ username: "NIKITHA.G", contactNumber: "7975979431" },
+{ username: "NEHA S", contactNumber: "7975882432" },
+{ username: "Sharanya P V", contactNumber: "9110225106" },
+{ username: "Uma hebballi", contactNumber: "8277453002" },
+{ username: "Manasa S", contactNumber: "7795744948" },
+{ username: "Shreeshail Shivappa Padadali", contactNumber: "8277220852" },
+{ username: "Manasa S", contactNumber: "6361718631" },
+{ username: "KeerthiShree BM", contactNumber: "9113658274" },
+{ username: "Ruchitha L", contactNumber: "8310039900" },
+{ username: "Chandana ko", contactNumber: "9449800481" },
+{ username: "Bhagya Hugar", contactNumber: "861814300" },
+{ username: "J Navya Sree", contactNumber: "6364184609" },
+{ username: "VARSHITHA. U", contactNumber: "9148782695" },
+{ username: "C CHANDRA KIRAN", contactNumber: "9620681886" },
+{ username: "Rakshitha GK", contactNumber: "7760340301" },
+{ username: "Som Shekar B", contactNumber: "9353652369" },
+{ username: "NIVAS D S", contactNumber: "9901797638" },
+{ username: "KeerthiShree", contactNumber: "9741340773" },
+{ username: "Chandana M", contactNumber: "8310600460" },
+{ username: "Naveen P Kavalakoppa", contactNumber: "8088437294" },
+{ username: "Shilpa M Itnal", contactNumber: "8951797605" },
+{ username: "Prerana C Hiremath", contactNumber: "6361611065" },
+{ username: "Gaganashree", contactNumber: "9902374460" },
+{ username: "Bhumika M", contactNumber: "9731761708" },
+{ username: "Navyashree N", contactNumber: "9019300109" },
+{ username: "Nayana Poojary", contactNumber: "8147885949" },
+{ username: "M Priyanka", contactNumber: "9113248307" },
+{ username: "Abdul Mujeeb", contactNumber: "8867678301" },
+{ username: "FarahSultana Badekhannavar", contactNumber: "8217252264" },
+{ username: "Pallavi", contactNumber: "8951189553" },
+{ username: "MAANYA .N", contactNumber: "8310425279" },
+{ username: "Jayashree", contactNumber: "7204942540" },
+{ username: "GANGADHAR K S", contactNumber: "8073814108" },
+{ username: "Meghana M K", contactNumber: "9591538445" },
+{ username: "Naveen Kumar", contactNumber: "8951783562" },
+{ username: "VIVEK MURTHY S R", contactNumber: "9008732734" },
+{ username: "Divya Hiranaik", contactNumber: "8618372936" },
+{ username: "Sufiya Banu Md Rafiq Momin", contactNumber: "7019368580" },
+{ username: "Dileep KN", contactNumber: "9742665333" },
+{ username: "Anu shree M", contactNumber: "9019969124" },
+{ username: "SHRINIVAS GANAPATI NAIK", contactNumber: "8884803576" },
+{ username: "Paschal D", contactNumber: "7019223012" },
+{ username: "Abubakar siddiq hawaldar", contactNumber: "8660910241" },
+{ username: "Bhavani", contactNumber: "9380341800" },
+{ username: "Deeksha S", contactNumber: "9108351883" },
+{ username: "Aditya Srivastava", contactNumber: "9148597774" },
+{ username: "Aymansana D Hampapattan", contactNumber: "8073277020" },
+{ username: "M S Ullas", contactNumber: "6364006330" },
+{ username: "Siddu", contactNumber: "8747913745" },
+{ username: "Thejaswini N", contactNumber: "8431332406" },
+{ username: "Preethi D", contactNumber: "7795774539" },
+{ username: "Akki Ronith", contactNumber: "9113827052" },
+{ username: "Chandana T N", contactNumber: "8618398096" },
+{ username: "Mahmedgous salimbega Miyabeganavar", contactNumber: "9353936071" },
+{ username: "Fathima Fahmi C I", contactNumber: "6238577609" },
+{ username: "Darshan G", contactNumber: "8147022622" },
+{ username: "SHRAVANI M", contactNumber: "7975547741" },
+{ username: "Nayana HN", contactNumber: "8660320401" },
+{ username: "Dharshini D", contactNumber: "9945924611" },
+{ username: "NITIN G N", contactNumber: "7892281799" },
+{ username: "Mustakeem Sanadi", contactNumber: "9019236445" },
+{ username: "Arbiya fathima", contactNumber: "9900443545" },
+{ username: "Darshan B N", contactNumber: "7619390443" },
+{ username: "Renuka M", contactNumber: "7483770259" },
+{ username: "Priya L", contactNumber: "8904089894" },
+{ username: "Srivathsa CM", contactNumber: "7892660871" },
+{ username: "Mohammad farhan zahi", contactNumber: "7795330091" },
+{ username: "Javali Shreelakshmi", contactNumber: "9036758760" },
+{ username: "Krishna lagamappa umarani", contactNumber: "6366033810" },
+{ username: "Rafeea Fathima", contactNumber: "7022727166" },
+{ username: "Ashwini.M", contactNumber: "7483692818" },
+{ username: "Rakshitha R", contactNumber: "7619544109" },
+{ username: "Chethan A", contactNumber: "9986993784" },
+{ username: "Poojitha R", contactNumber: "8867001350" },
+{ username: "Ashriyath Mumeeza", contactNumber: "9611676406" },
+{ username: "Navyashree J", contactNumber: "6362759486" },
+{ username: "Shaziya Khanum", contactNumber: "8792067596" },
+{ username: "Mandara D D", contactNumber: "9480123647" },
+{ username: "Rakshita Govindappa Halagatti", contactNumber: "9742876149" },
+{ username: "Sachin C", contactNumber: "6360589309" },
+{ username: "PAVAN HIREMATH", contactNumber: "8088804764" },
+{ username: "Vanitha N", contactNumber: "6360859045" },
+{ username: "MR YASHWANTH", contactNumber: "8431378491" },
+{ username: "Kushi HS", contactNumber: "7411083740" },
+{ username: "Ruchitha D", contactNumber: "8971811789" },
+{ username: "Bhuvaneshwari", contactNumber: "6360672763" },
+{ username: "VENUGOPALA G", contactNumber: "8147388562" },
+{ username: "Umme Saira Z", contactNumber: "7019883806" },
+{ username: "Kartik Maddi", contactNumber: "8618678083" },
+{ username: "Fathimath Jumana", contactNumber: "8277403006" },
+{ username: "Eshwari G.E", contactNumber: "8867277604" },
+{ username: "Sanjana B K", contactNumber: "8310001232" },
+{ username: "Pannaga S Prasad", contactNumber: "9110689826" },
+{ username: "Mohnish Mathur", contactNumber: "6377449628" },
+{ username: "Karthik", contactNumber: "8088873736" },
+{ username: "Harsha S", contactNumber: "8296740265" },
+{ username: "Sneha Patil", contactNumber: "9035686251" },
+{ username: "Bhagyashree k gani", contactNumber: "7019561376" },
+{ username: "Manoj Kumar D", contactNumber: "8861597263" },
+{ username: "Kartik Uday Tailor", contactNumber: "7483871231" },
+{ username: "Prashanth NB", contactNumber: "8660538107" },
+{ username: "Ayshath Asheeba P", contactNumber: "9567120557" },
+{ username: "Kushal S", contactNumber: "8217022799" },
+{ username: "Mohammed Irfan Kasai", contactNumber: "6363445997" },
+{ username: "Basappa Mallappa Baluragi", contactNumber: "8618201188" },
+{ username: "Tanjila B", contactNumber: "8073033915" },
+{ username: "Bhavani.v", contactNumber: "7338198351" },
+{ username: "ARJUN S", contactNumber: "9972573279" },
+{ username: "Divya. M", contactNumber: "9535120194" },
+{ username: "Shridhanya", contactNumber: "9741060297" },
+{ username: "Saniya.M", contactNumber: "7022820890" },
+{ username: "Mithun K", contactNumber: "7349689453" },
+{ username: "Bhanupriya H A", contactNumber: "6364364861" },
+{ username: "Priyadarshini K N", contactNumber: "7406896245" },
+{ username: "Vivek M B", contactNumber: "9019878704" },
+{ username: "Swati Patil", contactNumber: "9740190632" },
+{ username: "G.Jyothika", contactNumber: "9391881358" },
+{ username: "Dhanraj k Gouda", contactNumber: "9036604135" },
+{ username: "Dinesh S", contactNumber: "7826934441" },
+{ username: "Revathi PS", contactNumber: "8310693670" },
+{ username: "Nayana H", contactNumber: "7892862885" },
+{ username: "Dhinesh V", contactNumber: "7845260013" },
+{ username: "BiBi Sadiya", contactNumber: "9591368171" },
+{ username: "Darshan R", contactNumber: "8618917040" },
+{ username: "Geeta Gangadhar Kumbar", contactNumber: "9740250972" },
+{ username: "Gutti pradeep", contactNumber: "9390071812" },
+{ username: "Poorvika", contactNumber: "9620801453" },
+{ username: "Sahana D", contactNumber: "9731316856" },
+{ username: "Pradeep Badiger", contactNumber: "9606420793" },
+{ username: "VINAYAK GOUDA", contactNumber: "9901768665" },
+{ username: "Sakshi S Kotur", contactNumber: "9972560496" },
+{ username: "Rakshitha Patil V", contactNumber: "7353508477" },
+{ username: "Lava Padival", contactNumber: "9741220942" },
+{ username: "Deekshith SR", contactNumber: "9731925871" },
+{ username: "Sneha R", contactNumber: "8217492382" },
+{ username: "Aishwarya. J", contactNumber: "8867499658" },
+{ username: "Pooja S Hiremath", contactNumber: "9481931220" },
+{ username: "Meghana S", contactNumber: "9448975275" },
+{ username: "YESHWANTH S R", contactNumber: "9743868564" },
+{ username: "Harshitha. B", contactNumber: "7259962261" },
+{ username: "Amanurraheem Gadyal", contactNumber: "6364031413" },
+{ username: "Akshaya ys", contactNumber: "9880377178" },
+{ username: "Arshiya Fathima", contactNumber: "8123878965" },
+{ username: "Meena MS", contactNumber: "6366732811" },
+{ username: "Mahendra", contactNumber: "7349713639" },
+{ username: "Hashmida Tasleem", contactNumber: "9964451487" },
+{ username: "Malleshwari k", contactNumber: "7406149342" },
+{ username: "Mukhaddas", contactNumber: "8660882390" },
+{ username: "Vijayalakshmi", contactNumber: "9353607535" },
+{ username: "Tejashwini N M", contactNumber: "8431106549" },
+{ username: "Deepak gowda k", contactNumber: "7892352500" },
+{ username: "Sunil V", contactNumber: "9739014528" },
+{ username: "CHARAN CM", contactNumber: "9886687340" },
+{ username: "Priya bhandage", contactNumber: "8431970990" },
+{ username: "Tarun N", contactNumber: "8296585360" },
+{ username: "Archana L", contactNumber: "8660460156" },
+{ username: "Moulya R G", contactNumber: "6364222314" },
+{ username: "Abhishek R Khot", contactNumber: "9740641170" },
+{ username: "Abhishek.p", contactNumber: "7338476514" },
+{ username: "Usha MM", contactNumber: "8277122658" },
+{ username: "Monisha S P", contactNumber: "8088242969" },
+{ username: "Prakruthi DP", contactNumber: "7892906853" },
+{ username: "VINAY", contactNumber: "9019411308" },
+{ username: "Shivabasava", contactNumber: "7676880966" },
+{ username: "SIRI N", contactNumber: "8431221472" },
+{ username: "Shreya D G", contactNumber: "8618655383" },
+{ username: "Joshitha G N", contactNumber: "7483984029" },
+{ username: "Syeda Umme Haani", contactNumber: "7204409926" },
+{ username: "Suman", contactNumber: "8431278496" },
+{ username: "Aman kumar", contactNumber: "9341774601" },
+{ username: "Chethan S", contactNumber: "9019981576" },
+{ username: "Ananya Nayak", contactNumber: "8075689267" },
+{ username: "Chandana V", contactNumber: "8618530455" },
+{ username: "Jayashree LM", contactNumber: "7676717357" },
+{ username: "Dhanashri Katwe", contactNumber: "9886499220" },
+{ username: "Vaddar Sabanna Lagmanna", contactNumber: "8147874678" },
+{ username: "Niharika P", contactNumber: "6362711022" },
+{ username: "Veena HB", contactNumber: "9380598041" },
+{ username: "Kavyanjali", contactNumber: "8660200810" },
+{ username: "Shreya Sriranga", contactNumber: "8867239409" },
+{ username: "Raviraj", contactNumber: "9322975844" },
+{ username: "Archana B S", contactNumber: "7483194849" },
+{ username: "Vismaya L", contactNumber: "7019548217" },
+{ username: "Tarun Kumar k", contactNumber: "8971700944" },
+{ username: "UMME IMAN", contactNumber: "8073987741" },
+{ username: "Vivek Panchal", contactNumber: "9008696767" },
+{ username: "Ruchitha S", contactNumber: "7975729028" },
+{ username: "Rakshitha B R", contactNumber: "7975910186" },
+{ username: "Bhuvan p nayak", contactNumber: "6360039136" },
+{ username: "TILAK S", contactNumber: "9844651975" },
+{ username: "Shashank C A", contactNumber: "7760219785" },
+{ username: "Sushma M", contactNumber: "8217324278" },
+{ username: "Keerthana KS", contactNumber: "9353583269" },
+{ username: "Sangeeta Ningappa Jammihal", contactNumber: "9449261215" },
+{ username: "Preetham M N", contactNumber: "7022525417" },
+{ username: "Syed ilyas Hussain", contactNumber: "8197953297" },
+{ username: "Chethana M", contactNumber: "9019986944" }
+    ];
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const contactNumber = document.getElementById('contactNumber').value;
+        const errorMessage = document.getElementById('errorMessage');
+
+        const validUser = validCredentials.find(user => user.username === username && user.contactNumber === contactNumber);
+
+        if (validUser) {
+            // Redirect to the success page upon successful login
+            window.location.href = "success.html";
+        } else {
+            errorMessage.textContent = "Invalid username or contact number. Please try again.";
+        }
+    });
+</script>
+
+</body>
+</html>
